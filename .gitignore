@@ -47,3 +47,7 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Raw media dump (originals copied/renamed into public/sites/nightclub)
+public/img vid/
+.playwright-mcp/

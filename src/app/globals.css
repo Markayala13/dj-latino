@@ -7,9 +7,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Geist", "Geist Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-caveat), ui-sans-serif, cursive;
+  --font-title: var(--font-boldonse), var(--font-montserrat), system-ui, sans-serif;
+  --color-club-green: #1dbf6a;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -122,9 +125,131 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black font-sans;
+    color: rgba(255, 255, 255, 0.75);
   }
   html {
     @apply font-sans;
+  }
+}
+
+@layer utilities {
+  /* Outlined (stroke-only) display text used by hero, line-up names, and the
+     "Everyone happy partying" title. */
+  .text-outline {
+    -webkit-text-stroke: 1px #ffffff;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .text-outline-2 {
+    -webkit-text-stroke: 2px #ffffff;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-script {
+    font-family: var(--font-script);
+  }
+  .font-title {
+    font-family: var(--font-title);
+  }
+
+  /* Hero entrance + continuous neon glow */
+  .animate-hero-rise {
+    animation: heroRise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .animate-hero-rise-delayed {
+    animation: heroRise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: 0.15s;
+  }
+  .animate-neon {
+    animation: neonPulse 2.6s ease-in-out infinite;
+  }
+  .animate-float {
+    animation: floatY 5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-hero-rise,
+    .animate-hero-rise-delayed,
+    .animate-neon,
+    .animate-float {
+      animation: none;
+    }
+  }
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    text-shadow:
+      0 0 8px rgba(29, 191, 106, 0.45),
+      0 0 26px rgba(29, 191, 106, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 16px rgba(29, 191, 106, 0.85),
+      0 0 52px rgba(29, 191, 106, 0.45);
+  }
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(-6px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Scroll-down mouse indicator */
+@keyframes scrollWheel {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes mouseBob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+.animate-scroll-wheel {
+  animation: scrollWheel 1.8s ease-in-out infinite;
+}
+.animate-mouse-bob {
+  animation: mouseBob 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-wheel,
+  .animate-mouse-bob {
+    animation: none;
   }
 }
