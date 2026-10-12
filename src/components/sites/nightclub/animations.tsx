@@ -3,10 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const prefersReduced = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
 /**
  * Reveals its children with a fade + slide-up the first time it scrolls into
  * view (like the source Elementor entrance animations). `delay` staggers it.
@@ -24,10 +20,6 @@ export function Reveal({
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    if (prefersReduced()) {
-      const id = requestAnimationFrame(() => setShown(true));
-      return () => cancelAnimationFrame(id);
-    }
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -74,10 +66,6 @@ export function CountUp({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (prefersReduced()) {
-      const id = requestAnimationFrame(() => setN(value));
-      return () => cancelAnimationFrame(id);
-    }
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;

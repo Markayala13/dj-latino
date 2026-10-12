@@ -170,14 +170,6 @@
   .animate-float {
     animation: floatY 5s ease-in-out infinite;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .animate-hero-rise,
-    .animate-hero-rise-delayed,
-    .animate-neon,
-    .animate-float {
-      animation: none;
-    }
-  }
 }
 
 @keyframes heroRise {
@@ -246,10 +238,4 @@
 }
 .animate-mouse-bob {
   animation: mouseBob 2s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .animate-scroll-wheel,
-  .animate-mouse-bob {
-    animation: none;
-  }
 }

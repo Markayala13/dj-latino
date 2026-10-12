@@ -93,6 +93,17 @@ export function Footer() {
             })}
           </div>
         </div>
+
+        <div className="mt-10 overflow-hidden rounded-xl border border-white/10 md:col-span-4">
+          <iframe
+            title="Área de servicio — Los Ángeles"
+            src="https://www.google.com/maps?q=Los+Angeles,+CA&z=9&output=embed"
+            className="h-[260px] w-full md:h-[300px]"
+            style={{ filter: "invert(0.92) hue-rotate(180deg) brightness(0.9) contrast(0.95)" }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </div>
 
       <div className="border-t border-white/10 py-5">

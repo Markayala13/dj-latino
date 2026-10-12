@@ -254,19 +254,6 @@ export default function Home() {
               ))}
             </div>
           </Reveal>
-
-          <Reveal delay={200} className={`${container} mt-10`}>
-            <div className="overflow-hidden rounded-xl border border-white/10">
-              <iframe
-                title="Área de servicio — Los Ángeles"
-                src="https://www.google.com/maps?q=Los+Angeles,+CA&z=9&output=embed"
-                className="h-[320px] w-full md:h-[380px]"
-                style={{ filter: "invert(0.92) hue-rotate(180deg) brightness(0.9) contrast(0.95)" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </Reveal>
         </section>
 
         {/* ===== TAMBIÉN OFRECEMOS ===== */}
