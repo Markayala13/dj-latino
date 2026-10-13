@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { NAV_LINKS, CONTACT } from "./data";
+import { SocialLinks } from "./social";
 
 function Logo({ className, onClick }: { className?: string; onClick?: () => void }) {
   return (
@@ -106,6 +107,7 @@ export function Header() {
         </nav>
 
         <div className="shrink-0 space-y-4 border-t border-white/10 px-6 pb-10 pt-6">
+          <SocialLinks className="justify-center" />
           <Link
             href="#contacto"
             onClick={() => setOpen(false)}

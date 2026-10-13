@@ -52,6 +52,32 @@ export const SERVICES = [
   { icon: "party", title: "EVENTOS PRIVADOS", text: "Posadas, cumpleaños y eventos corporativos." },
 ] as const;
 
+// Paquete que agrupa, como un solo bloque: pantallas, slideshow de video/fotos
+// (ideal para quinceañeras) y micrófonos inalámbricos. `icon` mapea a un ícono de lucide.
+export const SCREEN_PACKAGE = {
+  tag: "PAQUETE ESPECIAL",
+  title: "PANTALLAS · VIDEO · MICRÓFONOS",
+  intro:
+    "Tres servicios que van juntos para que tu evento se vea y se escuche increíble, del montaje a la última canción.",
+  items: [
+    {
+      icon: "monitor",
+      title: "PANTALLAS PARA EVENTOS",
+      text: "Pantallas de gran formato para proyectar en vivo, visuales y los momentos clave de tu fiesta.",
+    },
+    {
+      icon: "film",
+      title: "SLIDESHOW DE VIDEO Y FOTOS",
+      text: "Presentación de fotos y video, ideal para quinceañeras: revive los mejores recuerdos en pantalla grande.",
+    },
+    {
+      icon: "mic",
+      title: "MICRÓFONOS INALÁMBRICOS",
+      text: "Micrófonos inalámbricos para discursos, brindis y animación, sin cables ni complicaciones.",
+    },
+  ],
+} as const;
+
 // Sección de videos — clips reales de eventos.
 export const VIDEOS = [
   { src: "/sites/nightclub/clip-01.mp4", poster: "/sites/nightclub/poster-01.jpg", title: "En vivo" },
@@ -99,8 +125,8 @@ export const CONTACT = {
 } as const;
 
 export const SOCIALS = [
-  { label: "Facebook", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Youtube", href: "#" },
-  { label: "Tiktok", href: "#" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=100042806832541" },
+  { label: "Instagram", href: "https://instagram.com/dj_pachanga_latina" },
+  { label: "Tiktok", href: "https://www.tiktok.com/@djpachangalatina" },
+  { label: "Maps", href: "https://maps.app.goo.gl/E4tBKnNYN1P43Ssv8" },
 ] as const;

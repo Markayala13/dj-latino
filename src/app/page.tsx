@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Camera, Heart, Crown, PartyPopper, Quote } from "lucide-react";
+import { MapPin, Camera, Heart, Crown, PartyPopper, Quote, Monitor, Film, Mic } from "lucide-react";
 import { Header } from "@/components/sites/nightclub/Header";
 import { Footer } from "@/components/sites/nightclub/Footer";
 import { ClubButton, GreenRule, SectionTitle } from "@/components/sites/nightclub/shared";
@@ -7,16 +7,57 @@ import { Reveal, CountUp } from "@/components/sites/nightclub/animations";
 import { VideoCarousel } from "@/components/sites/nightclub/VideoCarousel";
 import { WhatsAppFab } from "@/components/sites/nightclub/WhatsAppFab";
 import {
+  BRAND,
   TAGLINE,
   STATS,
   LINEUP,
   OFFERS,
   AREAS,
   SERVICES,
+  SCREEN_PACKAGE,
   TESTIMONIALS,
+  CONTACT,
+  SOCIALS,
 } from "@/components/sites/nightclub/data";
 
 const container = "mx-auto w-full max-w-[1140px] px-5";
+
+const SITE_URL = "https://djpachangalatina.com";
+
+// Datos estructurados para SEO local (Google Rich Results / Knowledge Panel).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EntertainmentBusiness",
+  "@id": `${SITE_URL}/#business`,
+  name: BRAND,
+  alternateName: `${BRAND} — ${TAGLINE}`,
+  description:
+    "DJ profesional y Photobooth 360 para quinceañeras, bodas, posadas y todo evento. Pantallas para eventos, slideshow de video y fotos, micrófonos inalámbricos, audio e iluminación.",
+  url: SITE_URL,
+  image: `${SITE_URL}/opengraph-image`,
+  telephone: `+1${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`,
+  email: CONTACT.email,
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Los Angeles",
+    addressRegion: "CA",
+    addressCountry: "US",
+  },
+  areaServed: [
+    { "@type": "City", name: "Los Angeles" },
+    { "@type": "AdministrativeArea", name: "Orange County" },
+    { "@type": "Place", name: "San Fernando Valley" },
+  ],
+  hasMap: SOCIALS.find((s) => s.label === "Maps")?.href,
+  sameAs: SOCIALS.filter((s) => s.label !== "Maps").map((s) => s.href),
+  makesOffer: [...OFFERS, ...SCREEN_PACKAGE.items.map((i) => i.title)].map(
+    (name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    }),
+  ),
+};
 
 const SERVICE_ICONS = {
   camera: Camera,
@@ -25,9 +66,19 @@ const SERVICE_ICONS = {
   party: PartyPopper,
 } as const;
 
+const PACKAGE_ICONS = {
+  monitor: Monitor,
+  film: Film,
+  mic: Mic,
+} as const;
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Header />
       <main id="top" className="flex-1 bg-black">
         {/* ===== HERO ===== */}
@@ -286,6 +337,48 @@ export default function Home() {
               );
             })}
           </div>
+        </section>
+
+        {/* ===== PAQUETE: PANTALLAS + VIDEO + MICRÓFONOS ===== */}
+        <section id="paquete" className="bg-black pb-14">
+          <Reveal className={container}>
+            <div className="relative overflow-hidden rounded-2xl border border-[var(--color-club-green)]/40 bg-gradient-to-b from-[var(--color-club-green)]/10 to-transparent p-8 md:p-12">
+              <div className="flex flex-col items-center text-center">
+                <span className="font-heading text-sm font-semibold uppercase tracking-[2px] text-[var(--color-club-green)]">
+                  {SCREEN_PACKAGE.tag}
+                </span>
+                <SectionTitle text={SCREEN_PACKAGE.title} className="mt-3 text-[26px] md:text-[38px]" />
+                <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/60">
+                  {SCREEN_PACKAGE.intro}
+                </p>
+              </div>
+
+              <div className="mt-10 grid gap-6 md:grid-cols-3">
+                {SCREEN_PACKAGE.items.map((item, i) => {
+                  const Icon = PACKAGE_ICONS[item.icon];
+                  return (
+                    <Reveal key={item.title} delay={i * 120}>
+                      <div className="flex h-full flex-col items-center rounded-xl border border-white/10 bg-black/40 p-6 text-center transition-colors hover:border-[var(--color-club-green)]/50">
+                        <span className="flex size-[64px] items-center justify-center rounded-full border border-[var(--color-club-green)]/40 bg-[var(--color-club-green)]/10 text-[var(--color-club-green)]">
+                          <Icon className="size-7" />
+                        </span>
+                        <h3 className="mt-5 font-heading text-[16px] font-bold uppercase text-white">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-relaxed text-white/55">{item.text}</p>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+
+              <div className="mt-10 flex justify-center">
+                <ClubButton href="#contacto" withArrow>
+                  Cotiza el paquete
+                </ClubButton>
+              </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* ===== PHOTOBOOTH 360 (CTA + galería) ===== */}
